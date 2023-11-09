@@ -27,17 +27,14 @@ def y_model(params, X):
 
 def loss(params, X, y):
     y_hat = y_model(params, X)
-
     return -jnp.mean(y * jnp.log(y_hat) + (1 - y) * jnp.log(1 - y_hat))
 
 
 def fit_logreg(X, y):
     params = jnp.zeros(X.shape[1] + 1)
-
     result = optimize.minimize(
         functools.partial(loss, X=X, y=y), x0=params, method="BFGS"
     )
-
     return result.x
 
 
